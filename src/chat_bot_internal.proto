@@ -1,0 +1,86 @@
+/* версия протобаф файла.*/
+syntax = "proto3";
+/* весь полученный из этого протобафа код добавляем в пакет _service */
+package chat_bot_internal_service;
+option go_package = "./proto_internal";
+
+/*
+Метод Find
+аргументы:
+    query - строка - идентификатор запроса
+    desired - структура - то что ищем
+    essence - строка - имя сущности
+    property - строка - имя свойства
+    conditions - массив структур - список условий
+	condition - структура - условие
+	    essence - строка - имя сущности
+	    property - строка - имя свойства
+	    value - строка - значение свойства
+
+возврат
+    result - строка - OK, Error
+    error - строка - описание ошибки
+    founds - массив структур - список найденных
+	found - структура - найденное
+	    essence - строка - имя сущности
+	    property - строка - имя свойства
+	    value - строка - значение свойства
+
+*/
+
+message FoundItem {
+    string essence = 1;
+    string property = 2;
+    string value = 3;
+}
+
+message ConditionItem {
+    string essence = 1;
+    string property = 2;
+    string value = 3;
+}
+
+message Founds {
+    repeated FoundItem Founds = 1; // список результатов
+}
+
+message FindRequest {
+    string query_id = 1;
+    string desired = 2;
+    string essence = 3;
+    string property = 4;
+    repeated ConditionItem conditions = 5; // список условий
+}
+
+message FindResponse {
+    string result = 1;
+    optional string error =2;
+    optional Founds founds =3;
+}
+
+/* Statistic info
+*/
+message StatRequest {
+    string mode = 1;
+}
+
+message StatResponse {
+    string result = 1;
+    optional string error = 2;
+    string info = 3;
+}
+
+message CheckRequest {
+    string query = 1;
+}
+
+message CheckResponse {
+    string result = 1;
+}
+
+/* сервис ChatBotInternal с методами Find*/
+service ChatBotInternal {
+    rpc Find(FindRequest) returns (FindResponse) {}
+    rpc Stat(StatRequest) returns (StatResponse) {}
+    rpc Check(CheckRequest) returns (CheckResponse) {}
+}

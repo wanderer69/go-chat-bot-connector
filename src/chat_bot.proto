@@ -1,0 +1,75 @@
+/* версия протобаф файла.*/
+syntax = "proto3";
+/* весь полученный из этого протобафа код добавляем в пакет _service */
+package chat_bot_service;
+option go_package = "./proto";
+
+/* 
+*/
+message ParsePhraseRequest {
+    string user_id = 1;
+    string session_id = 2;
+    string phrase = 3;
+    int32 sequense_num = 4;
+}
+
+message ParsePhraseResponse {
+    string result = 1;
+    optional string error =2;
+    string query_id =3;
+}
+
+message CheckParsePhraseRequest {
+    string query_id = 1;
+}
+
+message CheckParsePhraseResponse {
+    string result = 1;
+    optional string error =2;
+    string phrase = 3;
+}
+
+message Settings {
+    string RelationList = 1;
+    string PathToOpCorpora = 2;
+    string GrammaticsList = 3;
+}
+
+message SetSettingsRequest {
+    string state = 1;
+    Settings settings = 2;
+}
+
+message SetSettingsResponse {
+    string result = 1;
+    optional string error =2;
+}
+
+/* Statistic info
+*/
+message StatRequest {
+    string mode = 1;
+}
+
+message StatResponse {
+    string result = 1;
+    optional string error = 2;
+    string info = 3;
+}
+
+message CheckRequest {
+    string query = 1;
+}
+
+message CheckResponse {
+    string result = 1;
+}
+
+/* сервис ChatBot с методами ParseSentense, CheckParseSentense, SetSettings, Stat, и Check*/
+service ChatBot {
+    rpc ParsePhrase(ParsePhraseRequest) returns (ParsePhraseResponse) {}
+    rpc CheckParsePhrase(CheckParsePhraseRequest) returns (CheckParsePhraseResponse) {}
+    rpc SetSettings(SetSettingsRequest) returns (SetSettingsResponse) {}
+    rpc Stat(StatRequest) returns (StatResponse) {}
+    rpc Check(CheckRequest) returns (CheckResponse) {}
+}
