@@ -273,18 +273,17 @@ func (x *CheckParsePhraseResponse) GetPhrase() string {
 	return ""
 }
 
-type Settings struct {
+type VersionId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	RelationList    string `protobuf:"bytes,1,opt,name=RelationList,proto3" json:"RelationList,omitempty"`
-	PathToOpCorpora string `protobuf:"bytes,2,opt,name=PathToOpCorpora,proto3" json:"PathToOpCorpora,omitempty"`
-	GrammaticsList  string `protobuf:"bytes,3,opt,name=GrammaticsList,proto3" json:"GrammaticsList,omitempty"`
+	Id   string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Date string `protobuf:"bytes,2,opt,name=date,proto3" json:"date,omitempty"`
 }
 
-func (x *Settings) Reset() {
-	*x = Settings{}
+func (x *VersionId) Reset() {
+	*x = VersionId{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_chat_bot_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -292,13 +291,13 @@ func (x *Settings) Reset() {
 	}
 }
 
-func (x *Settings) String() string {
+func (x *VersionId) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Settings) ProtoMessage() {}
+func (*VersionId) ProtoMessage() {}
 
-func (x *Settings) ProtoReflect() protoreflect.Message {
+func (x *VersionId) ProtoReflect() protoreflect.Message {
 	mi := &file_chat_bot_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -310,43 +309,37 @@ func (x *Settings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Settings.ProtoReflect.Descriptor instead.
-func (*Settings) Descriptor() ([]byte, []int) {
+// Deprecated: Use VersionId.ProtoReflect.Descriptor instead.
+func (*VersionId) Descriptor() ([]byte, []int) {
 	return file_chat_bot_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *Settings) GetRelationList() string {
+func (x *VersionId) GetId() string {
 	if x != nil {
-		return x.RelationList
+		return x.Id
 	}
 	return ""
 }
 
-func (x *Settings) GetPathToOpCorpora() string {
+func (x *VersionId) GetDate() string {
 	if x != nil {
-		return x.PathToOpCorpora
+		return x.Date
 	}
 	return ""
 }
 
-func (x *Settings) GetGrammaticsList() string {
-	if x != nil {
-		return x.GrammaticsList
-	}
-	return ""
-}
-
-type SetSettingsRequest struct {
+type Version struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	State    string    `protobuf:"bytes,1,opt,name=state,proto3" json:"state,omitempty"`
-	Settings *Settings `protobuf:"bytes,2,opt,name=settings,proto3" json:"settings,omitempty"`
+	VersionId      *VersionId `protobuf:"bytes,1,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	RelationList   string     `protobuf:"bytes,2,opt,name=RelationList,proto3" json:"RelationList,omitempty"`
+	GrammaticsList string     `protobuf:"bytes,3,opt,name=GrammaticsList,proto3" json:"GrammaticsList,omitempty"`
 }
 
-func (x *SetSettingsRequest) Reset() {
-	*x = SetSettingsRequest{}
+func (x *Version) Reset() {
+	*x = Version{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_chat_bot_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -354,13 +347,13 @@ func (x *SetSettingsRequest) Reset() {
 	}
 }
 
-func (x *SetSettingsRequest) String() string {
+func (x *Version) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetSettingsRequest) ProtoMessage() {}
+func (*Version) ProtoMessage() {}
 
-func (x *SetSettingsRequest) ProtoReflect() protoreflect.Message {
+func (x *Version) ProtoReflect() protoreflect.Message {
 	mi := &file_chat_bot_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -372,36 +365,43 @@ func (x *SetSettingsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetSettingsRequest.ProtoReflect.Descriptor instead.
-func (*SetSettingsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use Version.ProtoReflect.Descriptor instead.
+func (*Version) Descriptor() ([]byte, []int) {
 	return file_chat_bot_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *SetSettingsRequest) GetState() string {
+func (x *Version) GetVersionId() *VersionId {
 	if x != nil {
-		return x.State
-	}
-	return ""
-}
-
-func (x *SetSettingsRequest) GetSettings() *Settings {
-	if x != nil {
-		return x.Settings
+		return x.VersionId
 	}
 	return nil
 }
 
-type SetSettingsResponse struct {
+func (x *Version) GetRelationList() string {
+	if x != nil {
+		return x.RelationList
+	}
+	return ""
+}
+
+func (x *Version) GetGrammaticsList() string {
+	if x != nil {
+		return x.GrammaticsList
+	}
+	return ""
+}
+
+type SetVersionRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Result string  `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
-	Error  *string `protobuf:"bytes,2,opt,name=error,proto3,oneof" json:"error,omitempty"`
+	State   string   `protobuf:"bytes,1,opt,name=state,proto3" json:"state,omitempty"`
+	Version *Version `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
 }
 
-func (x *SetSettingsResponse) Reset() {
-	*x = SetSettingsResponse{}
+func (x *SetVersionRequest) Reset() {
+	*x = SetVersionRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_chat_bot_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -409,13 +409,13 @@ func (x *SetSettingsResponse) Reset() {
 	}
 }
 
-func (x *SetSettingsResponse) String() string {
+func (x *SetVersionRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetSettingsResponse) ProtoMessage() {}
+func (*SetVersionRequest) ProtoMessage() {}
 
-func (x *SetSettingsResponse) ProtoReflect() protoreflect.Message {
+func (x *SetVersionRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_chat_bot_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -427,21 +427,603 @@ func (x *SetSettingsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetSettingsResponse.ProtoReflect.Descriptor instead.
-func (*SetSettingsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetVersionRequest.ProtoReflect.Descriptor instead.
+func (*SetVersionRequest) Descriptor() ([]byte, []int) {
 	return file_chat_bot_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *SetSettingsResponse) GetResult() string {
+func (x *SetVersionRequest) GetState() string {
+	if x != nil {
+		return x.State
+	}
+	return ""
+}
+
+func (x *SetVersionRequest) GetVersion() *Version {
+	if x != nil {
+		return x.Version
+	}
+	return nil
+}
+
+type SetVersionResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Result string  `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	Error  *string `protobuf:"bytes,2,opt,name=error,proto3,oneof" json:"error,omitempty"`
+}
+
+func (x *SetVersionResponse) Reset() {
+	*x = SetVersionResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_chat_bot_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SetVersionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetVersionResponse) ProtoMessage() {}
+
+func (x *SetVersionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_chat_bot_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetVersionResponse.ProtoReflect.Descriptor instead.
+func (*SetVersionResponse) Descriptor() ([]byte, []int) {
+	return file_chat_bot_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *SetVersionResponse) GetResult() string {
 	if x != nil {
 		return x.Result
 	}
 	return ""
 }
 
-func (x *SetSettingsResponse) GetError() string {
+func (x *SetVersionResponse) GetError() string {
 	if x != nil && x.Error != nil {
 		return *x.Error
+	}
+	return ""
+}
+
+type GetVersionRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	VersionId *VersionId `protobuf:"bytes,1,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	State     string     `protobuf:"bytes,2,opt,name=state,proto3" json:"state,omitempty"`
+}
+
+func (x *GetVersionRequest) Reset() {
+	*x = GetVersionRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_chat_bot_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetVersionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetVersionRequest) ProtoMessage() {}
+
+func (x *GetVersionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_chat_bot_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetVersionRequest.ProtoReflect.Descriptor instead.
+func (*GetVersionRequest) Descriptor() ([]byte, []int) {
+	return file_chat_bot_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetVersionRequest) GetVersionId() *VersionId {
+	if x != nil {
+		return x.VersionId
+	}
+	return nil
+}
+
+func (x *GetVersionRequest) GetState() string {
+	if x != nil {
+		return x.State
+	}
+	return ""
+}
+
+type GetVersionResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Result  string   `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	Error   *string  `protobuf:"bytes,2,opt,name=error,proto3,oneof" json:"error,omitempty"`
+	Version *Version `protobuf:"bytes,3,opt,name=version,proto3,oneof" json:"version,omitempty"`
+}
+
+func (x *GetVersionResponse) Reset() {
+	*x = GetVersionResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_chat_bot_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetVersionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetVersionResponse) ProtoMessage() {}
+
+func (x *GetVersionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_chat_bot_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetVersionResponse.ProtoReflect.Descriptor instead.
+func (*GetVersionResponse) Descriptor() ([]byte, []int) {
+	return file_chat_bot_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetVersionResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+func (x *GetVersionResponse) GetError() string {
+	if x != nil && x.Error != nil {
+		return *x.Error
+	}
+	return ""
+}
+
+func (x *GetVersionResponse) GetVersion() *Version {
+	if x != nil {
+		return x.Version
+	}
+	return nil
+}
+
+type ListVersions struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	VersionId []*VersionId `protobuf:"bytes,1,rep,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+}
+
+func (x *ListVersions) Reset() {
+	*x = ListVersions{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_chat_bot_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListVersions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListVersions) ProtoMessage() {}
+
+func (x *ListVersions) ProtoReflect() protoreflect.Message {
+	mi := &file_chat_bot_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListVersions.ProtoReflect.Descriptor instead.
+func (*ListVersions) Descriptor() ([]byte, []int) {
+	return file_chat_bot_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ListVersions) GetVersionId() []*VersionId {
+	if x != nil {
+		return x.VersionId
+	}
+	return nil
+}
+
+type ListVersionsRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	State string `protobuf:"bytes,1,opt,name=state,proto3" json:"state,omitempty"`
+}
+
+func (x *ListVersionsRequest) Reset() {
+	*x = ListVersionsRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_chat_bot_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListVersionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListVersionsRequest) ProtoMessage() {}
+
+func (x *ListVersionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_chat_bot_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListVersionsRequest.ProtoReflect.Descriptor instead.
+func (*ListVersionsRequest) Descriptor() ([]byte, []int) {
+	return file_chat_bot_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ListVersionsRequest) GetState() string {
+	if x != nil {
+		return x.State
+	}
+	return ""
+}
+
+type ListVersionsResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Result       string        `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	Error        *string       `protobuf:"bytes,2,opt,name=error,proto3,oneof" json:"error,omitempty"`
+	ListVersions *ListVersions `protobuf:"bytes,3,opt,name=list_versions,json=listVersions,proto3,oneof" json:"list_versions,omitempty"`
+}
+
+func (x *ListVersionsResponse) Reset() {
+	*x = ListVersionsResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_chat_bot_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListVersionsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListVersionsResponse) ProtoMessage() {}
+
+func (x *ListVersionsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_chat_bot_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListVersionsResponse.ProtoReflect.Descriptor instead.
+func (*ListVersionsResponse) Descriptor() ([]byte, []int) {
+	return file_chat_bot_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ListVersionsResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+func (x *ListVersionsResponse) GetError() string {
+	if x != nil && x.Error != nil {
+		return *x.Error
+	}
+	return ""
+}
+
+func (x *ListVersionsResponse) GetListVersions() *ListVersions {
+	if x != nil {
+		return x.ListVersions
+	}
+	return nil
+}
+
+type TestVersionRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UserId      string   `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Phrase      string   `protobuf:"bytes,2,opt,name=phrase,proto3" json:"phrase,omitempty"`
+	Date        string   `protobuf:"bytes,3,opt,name=date,proto3" json:"date,omitempty"`
+	SequenseNum int32    `protobuf:"varint,4,opt,name=sequense_num,json=sequenseNum,proto3" json:"sequense_num,omitempty"`
+	Version     *Version `protobuf:"bytes,5,opt,name=version,proto3" json:"version,omitempty"`
+}
+
+func (x *TestVersionRequest) Reset() {
+	*x = TestVersionRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_chat_bot_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *TestVersionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TestVersionRequest) ProtoMessage() {}
+
+func (x *TestVersionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_chat_bot_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TestVersionRequest.ProtoReflect.Descriptor instead.
+func (*TestVersionRequest) Descriptor() ([]byte, []int) {
+	return file_chat_bot_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *TestVersionRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *TestVersionRequest) GetPhrase() string {
+	if x != nil {
+		return x.Phrase
+	}
+	return ""
+}
+
+func (x *TestVersionRequest) GetDate() string {
+	if x != nil {
+		return x.Date
+	}
+	return ""
+}
+
+func (x *TestVersionRequest) GetSequenseNum() int32 {
+	if x != nil {
+		return x.SequenseNum
+	}
+	return 0
+}
+
+func (x *TestVersionRequest) GetVersion() *Version {
+	if x != nil {
+		return x.Version
+	}
+	return nil
+}
+
+type TestVersionResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Result  string  `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	Error   *string `protobuf:"bytes,2,opt,name=error,proto3,oneof" json:"error,omitempty"`
+	QueryId string  `protobuf:"bytes,3,opt,name=query_id,json=queryId,proto3" json:"query_id,omitempty"`
+}
+
+func (x *TestVersionResponse) Reset() {
+	*x = TestVersionResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_chat_bot_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *TestVersionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TestVersionResponse) ProtoMessage() {}
+
+func (x *TestVersionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_chat_bot_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TestVersionResponse.ProtoReflect.Descriptor instead.
+func (*TestVersionResponse) Descriptor() ([]byte, []int) {
+	return file_chat_bot_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *TestVersionResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+func (x *TestVersionResponse) GetError() string {
+	if x != nil && x.Error != nil {
+		return *x.Error
+	}
+	return ""
+}
+
+func (x *TestVersionResponse) GetQueryId() string {
+	if x != nil {
+		return x.QueryId
+	}
+	return ""
+}
+
+type GetWordRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Word string `protobuf:"bytes,1,opt,name=word,proto3" json:"word,omitempty"`
+}
+
+func (x *GetWordRequest) Reset() {
+	*x = GetWordRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_chat_bot_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetWordRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetWordRequest) ProtoMessage() {}
+
+func (x *GetWordRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_chat_bot_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetWordRequest.ProtoReflect.Descriptor instead.
+func (*GetWordRequest) Descriptor() ([]byte, []int) {
+	return file_chat_bot_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *GetWordRequest) GetWord() string {
+	if x != nil {
+		return x.Word
+	}
+	return ""
+}
+
+type GetWordResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Result       string  `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	Error        *string `protobuf:"bytes,2,opt,name=error,proto3,oneof" json:"error,omitempty"`
+	PartOfSpeach string  `protobuf:"bytes,3,opt,name=part_of_speach,json=partOfSpeach,proto3" json:"part_of_speach,omitempty"`
+}
+
+func (x *GetWordResponse) Reset() {
+	*x = GetWordResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_chat_bot_proto_msgTypes[16]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetWordResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetWordResponse) ProtoMessage() {}
+
+func (x *GetWordResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_chat_bot_proto_msgTypes[16]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetWordResponse.ProtoReflect.Descriptor instead.
+func (*GetWordResponse) Descriptor() ([]byte, []int) {
+	return file_chat_bot_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *GetWordResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+func (x *GetWordResponse) GetError() string {
+	if x != nil && x.Error != nil {
+		return *x.Error
+	}
+	return ""
+}
+
+func (x *GetWordResponse) GetPartOfSpeach() string {
+	if x != nil {
+		return x.PartOfSpeach
 	}
 	return ""
 }
@@ -458,7 +1040,7 @@ type StatRequest struct {
 func (x *StatRequest) Reset() {
 	*x = StatRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_chat_bot_proto_msgTypes[7]
+		mi := &file_chat_bot_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -471,7 +1053,7 @@ func (x *StatRequest) String() string {
 func (*StatRequest) ProtoMessage() {}
 
 func (x *StatRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_bot_proto_msgTypes[7]
+	mi := &file_chat_bot_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -484,7 +1066,7 @@ func (x *StatRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatRequest.ProtoReflect.Descriptor instead.
 func (*StatRequest) Descriptor() ([]byte, []int) {
-	return file_chat_bot_proto_rawDescGZIP(), []int{7}
+	return file_chat_bot_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *StatRequest) GetMode() string {
@@ -507,7 +1089,7 @@ type StatResponse struct {
 func (x *StatResponse) Reset() {
 	*x = StatResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_chat_bot_proto_msgTypes[8]
+		mi := &file_chat_bot_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -520,7 +1102,7 @@ func (x *StatResponse) String() string {
 func (*StatResponse) ProtoMessage() {}
 
 func (x *StatResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_bot_proto_msgTypes[8]
+	mi := &file_chat_bot_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -533,7 +1115,7 @@ func (x *StatResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatResponse.ProtoReflect.Descriptor instead.
 func (*StatResponse) Descriptor() ([]byte, []int) {
-	return file_chat_bot_proto_rawDescGZIP(), []int{8}
+	return file_chat_bot_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *StatResponse) GetResult() string {
@@ -568,7 +1150,7 @@ type CheckRequest struct {
 func (x *CheckRequest) Reset() {
 	*x = CheckRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_chat_bot_proto_msgTypes[9]
+		mi := &file_chat_bot_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -581,7 +1163,7 @@ func (x *CheckRequest) String() string {
 func (*CheckRequest) ProtoMessage() {}
 
 func (x *CheckRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_bot_proto_msgTypes[9]
+	mi := &file_chat_bot_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -594,7 +1176,7 @@ func (x *CheckRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckRequest.ProtoReflect.Descriptor instead.
 func (*CheckRequest) Descriptor() ([]byte, []int) {
-	return file_chat_bot_proto_rawDescGZIP(), []int{9}
+	return file_chat_bot_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *CheckRequest) GetQuery() string {
@@ -615,7 +1197,7 @@ type CheckResponse struct {
 func (x *CheckResponse) Reset() {
 	*x = CheckResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_chat_bot_proto_msgTypes[10]
+		mi := &file_chat_bot_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -628,7 +1210,7 @@ func (x *CheckResponse) String() string {
 func (*CheckResponse) ProtoMessage() {}
 
 func (x *CheckResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_chat_bot_proto_msgTypes[10]
+	mi := &file_chat_bot_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -641,7 +1223,7 @@ func (x *CheckResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckResponse.ProtoReflect.Descriptor instead.
 func (*CheckResponse) Descriptor() ([]byte, []int) {
-	return file_chat_bot_proto_rawDescGZIP(), []int{10}
+	return file_chat_bot_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *CheckResponse) GetResult() string {
@@ -682,69 +1264,158 @@ var file_chat_bot_proto_rawDesc = []byte{
 	0x20, 0x01, 0x28, 0x09, 0x48, 0x00, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x88, 0x01, 0x01,
 	0x12, 0x16, 0x0a, 0x06, 0x70, 0x68, 0x72, 0x61, 0x73, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x06, 0x70, 0x68, 0x72, 0x61, 0x73, 0x65, 0x42, 0x08, 0x0a, 0x06, 0x5f, 0x65, 0x72, 0x72,
-	0x6f, 0x72, 0x22, 0x80, 0x01, 0x0a, 0x08, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x12,
-	0x22, 0x0a, 0x0c, 0x52, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x52, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4c,
-	0x69, 0x73, 0x74, 0x12, 0x28, 0x0a, 0x0f, 0x50, 0x61, 0x74, 0x68, 0x54, 0x6f, 0x4f, 0x70, 0x43,
-	0x6f, 0x72, 0x70, 0x6f, 0x72, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0f, 0x50, 0x61,
-	0x74, 0x68, 0x54, 0x6f, 0x4f, 0x70, 0x43, 0x6f, 0x72, 0x70, 0x6f, 0x72, 0x61, 0x12, 0x26, 0x0a,
-	0x0e, 0x47, 0x72, 0x61, 0x6d, 0x6d, 0x61, 0x74, 0x69, 0x63, 0x73, 0x4c, 0x69, 0x73, 0x74, 0x18,
-	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x47, 0x72, 0x61, 0x6d, 0x6d, 0x61, 0x74, 0x69, 0x63,
-	0x73, 0x4c, 0x69, 0x73, 0x74, 0x22, 0x62, 0x0a, 0x12, 0x53, 0x65, 0x74, 0x53, 0x65, 0x74, 0x74,
-	0x69, 0x6e, 0x67, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x73,
-	0x74, 0x61, 0x74, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x73, 0x74, 0x61, 0x74,
-	0x65, 0x12, 0x36, 0x0a, 0x08, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73,
-	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x52,
-	0x08, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x22, 0x52, 0x0a, 0x13, 0x53, 0x65, 0x74,
-	0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x19, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f,
-	0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x48, 0x00, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72,
-	0x88, 0x01, 0x01, 0x42, 0x08, 0x0a, 0x06, 0x5f, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x22, 0x21, 0x0a,
-	0x0b, 0x53, 0x74, 0x61, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04,
-	0x6d, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6d, 0x6f, 0x64, 0x65,
-	0x22, 0x5f, 0x0a, 0x0c, 0x53, 0x74, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x19, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f,
-	0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x48, 0x00, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72,
-	0x88, 0x01, 0x01, 0x12, 0x12, 0x0a, 0x04, 0x69, 0x6e, 0x66, 0x6f, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x04, 0x69, 0x6e, 0x66, 0x6f, 0x42, 0x08, 0x0a, 0x06, 0x5f, 0x65, 0x72, 0x72, 0x6f,
-	0x72, 0x22, 0x24, 0x0a, 0x0c, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x12, 0x14, 0x0a, 0x05, 0x71, 0x75, 0x65, 0x72, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x05, 0x71, 0x75, 0x65, 0x72, 0x79, 0x22, 0x27, 0x0a, 0x0d, 0x43, 0x68, 0x65, 0x63, 0x6b,
+	0x6f, 0x72, 0x22, 0x2f, 0x0a, 0x09, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12,
+	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12,
+	0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64,
+	0x61, 0x74, 0x65, 0x22, 0x91, 0x01, 0x0a, 0x07, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12,
+	0x3a, 0x0a, 0x0a, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73,
+	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x49, 0x64,
+	0x52, 0x09, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x22, 0x0a, 0x0c, 0x52,
+	0x65, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x0c, 0x52, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x12,
+	0x26, 0x0a, 0x0e, 0x47, 0x72, 0x61, 0x6d, 0x6d, 0x61, 0x74, 0x69, 0x63, 0x73, 0x4c, 0x69, 0x73,
+	0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x47, 0x72, 0x61, 0x6d, 0x6d, 0x61, 0x74,
+	0x69, 0x63, 0x73, 0x4c, 0x69, 0x73, 0x74, 0x22, 0x5e, 0x0a, 0x11, 0x53, 0x65, 0x74, 0x56, 0x65,
+	0x72, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05,
+	0x73, 0x74, 0x61, 0x74, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x73, 0x74, 0x61,
+	0x74, 0x65, 0x12, 0x33, 0x0a, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73,
+	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x07,
+	0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0x51, 0x0a, 0x12, 0x53, 0x65, 0x74, 0x56, 0x65,
+	0x72, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a,
+	0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72,
+	0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x19, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x48, 0x00, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x88, 0x01, 0x01,
+	0x42, 0x08, 0x0a, 0x06, 0x5f, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x22, 0x65, 0x0a, 0x11, 0x47, 0x65,
+	0x74, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
+	0x3a, 0x0a, 0x0a, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73,
+	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x49, 0x64,
+	0x52, 0x09, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x73,
+	0x74, 0x61, 0x74, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x73, 0x74, 0x61, 0x74,
+	0x65, 0x22, 0x97, 0x01, 0x0a, 0x12, 0x47, 0x65, 0x74, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e,
 	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75,
 	0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74,
-	0x32, 0xc7, 0x03, 0x0a, 0x07, 0x43, 0x68, 0x61, 0x74, 0x42, 0x6f, 0x74, 0x12, 0x5c, 0x0a, 0x0b,
-	0x50, 0x61, 0x72, 0x73, 0x65, 0x50, 0x68, 0x72, 0x61, 0x73, 0x65, 0x12, 0x24, 0x2e, 0x63, 0x68,
-	0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x50,
+	0x12, 0x19, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x48,
+	0x00, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x88, 0x01, 0x01, 0x12, 0x38, 0x0a, 0x07, 0x76,
+	0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63,
+	0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e,
+	0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x48, 0x01, 0x52, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69,
+	0x6f, 0x6e, 0x88, 0x01, 0x01, 0x42, 0x08, 0x0a, 0x06, 0x5f, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x42,
+	0x0a, 0x0a, 0x08, 0x5f, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0x4a, 0x0a, 0x0c, 0x4c,
+	0x69, 0x73, 0x74, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x3a, 0x0a, 0x0a, 0x76,
+	0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32,
+	0x1b, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69,
+	0x63, 0x65, 0x2e, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x52, 0x09, 0x76, 0x65,
+	0x72, 0x73, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x22, 0x2b, 0x0a, 0x13, 0x4c, 0x69, 0x73, 0x74, 0x56,
+	0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14,
+	0x0a, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x73,
+	0x74, 0x61, 0x74, 0x65, 0x22, 0xaf, 0x01, 0x0a, 0x14, 0x4c, 0x69, 0x73, 0x74, 0x56, 0x65, 0x72,
+	0x73, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a,
+	0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72,
+	0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x19, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x48, 0x00, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x88, 0x01, 0x01,
+	0x12, 0x48, 0x0a, 0x0d, 0x6c, 0x69, 0x73, 0x74, 0x5f, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e,
+	0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62,
+	0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x56,
+	0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x48, 0x01, 0x52, 0x0c, 0x6c, 0x69, 0x73, 0x74, 0x56,
+	0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x88, 0x01, 0x01, 0x42, 0x08, 0x0a, 0x06, 0x5f, 0x65,
+	0x72, 0x72, 0x6f, 0x72, 0x42, 0x10, 0x0a, 0x0e, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x5f, 0x76, 0x65,
+	0x72, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0xb1, 0x01, 0x0a, 0x12, 0x54, 0x65, 0x73, 0x74, 0x56,
+	0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x17, 0x0a,
+	0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
+	0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x68, 0x72, 0x61, 0x73, 0x65,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x68, 0x72, 0x61, 0x73, 0x65, 0x12, 0x12,
+	0x0a, 0x04, 0x64, 0x61, 0x74, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x61,
+	0x74, 0x65, 0x12, 0x21, 0x0a, 0x0c, 0x73, 0x65, 0x71, 0x75, 0x65, 0x6e, 0x73, 0x65, 0x5f, 0x6e,
+	0x75, 0x6d, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0b, 0x73, 0x65, 0x71, 0x75, 0x65, 0x6e,
+	0x73, 0x65, 0x4e, 0x75, 0x6d, 0x12, 0x33, 0x0a, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e,
+	0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f,
+	0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f,
+	0x6e, 0x52, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0x6d, 0x0a, 0x13, 0x54, 0x65,
+	0x73, 0x74, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x19, 0x0a, 0x05, 0x65, 0x72, 0x72,
+	0x6f, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x48, 0x00, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f,
+	0x72, 0x88, 0x01, 0x01, 0x12, 0x19, 0x0a, 0x08, 0x71, 0x75, 0x65, 0x72, 0x79, 0x5f, 0x69, 0x64,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x71, 0x75, 0x65, 0x72, 0x79, 0x49, 0x64, 0x42,
+	0x08, 0x0a, 0x06, 0x5f, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x22, 0x24, 0x0a, 0x0e, 0x47, 0x65, 0x74,
+	0x57, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x77,
+	0x6f, 0x72, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x77, 0x6f, 0x72, 0x64, 0x22,
+	0x74, 0x0a, 0x0f, 0x47, 0x65, 0x74, 0x57, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x19, 0x0a, 0x05, 0x65, 0x72,
+	0x72, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x48, 0x00, 0x52, 0x05, 0x65, 0x72, 0x72,
+	0x6f, 0x72, 0x88, 0x01, 0x01, 0x12, 0x24, 0x0a, 0x0e, 0x70, 0x61, 0x72, 0x74, 0x5f, 0x6f, 0x66,
+	0x5f, 0x73, 0x70, 0x65, 0x61, 0x63, 0x68, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x70,
+	0x61, 0x72, 0x74, 0x4f, 0x66, 0x53, 0x70, 0x65, 0x61, 0x63, 0x68, 0x42, 0x08, 0x0a, 0x06, 0x5f,
+	0x65, 0x72, 0x72, 0x6f, 0x72, 0x22, 0x21, 0x0a, 0x0b, 0x53, 0x74, 0x61, 0x74, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6d, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x04, 0x6d, 0x6f, 0x64, 0x65, 0x22, 0x5f, 0x0a, 0x0c, 0x53, 0x74, 0x61, 0x74,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75,
+	0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74,
+	0x12, 0x19, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x48,
+	0x00, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x88, 0x01, 0x01, 0x12, 0x12, 0x0a, 0x04, 0x69,
+	0x6e, 0x66, 0x6f, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x69, 0x6e, 0x66, 0x6f, 0x42,
+	0x08, 0x0a, 0x06, 0x5f, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x22, 0x24, 0x0a, 0x0c, 0x43, 0x68, 0x65,
+	0x63, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x71, 0x75, 0x65,
+	0x72, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x71, 0x75, 0x65, 0x72, 0x79, 0x22,
+	0x27, 0x0a, 0x0d, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x32, 0xb0, 0x06, 0x0a, 0x07, 0x43, 0x68, 0x61,
+	0x74, 0x42, 0x6f, 0x74, 0x12, 0x5c, 0x0a, 0x0b, 0x50, 0x61, 0x72, 0x73, 0x65, 0x50, 0x68, 0x72,
+	0x61, 0x73, 0x65, 0x12, 0x24, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73,
+	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x50, 0x61, 0x72, 0x73, 0x65, 0x50, 0x68, 0x72, 0x61,
+	0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x25, 0x2e, 0x63, 0x68, 0x61, 0x74,
+	0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x50, 0x61, 0x72,
+	0x73, 0x65, 0x50, 0x68, 0x72, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0x00, 0x12, 0x6b, 0x0a, 0x10, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x50, 0x61, 0x72, 0x73, 0x65,
+	0x50, 0x68, 0x72, 0x61, 0x73, 0x65, 0x12, 0x29, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f,
+	0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x50,
 	0x61, 0x72, 0x73, 0x65, 0x50, 0x68, 0x72, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x1a, 0x25, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72,
-	0x76, 0x69, 0x63, 0x65, 0x2e, 0x50, 0x61, 0x72, 0x73, 0x65, 0x50, 0x68, 0x72, 0x61, 0x73, 0x65,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x6b, 0x0a, 0x10, 0x43, 0x68,
-	0x65, 0x63, 0x6b, 0x50, 0x61, 0x72, 0x73, 0x65, 0x50, 0x68, 0x72, 0x61, 0x73, 0x65, 0x12, 0x29,
-	0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
-	0x65, 0x2e, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x50, 0x61, 0x72, 0x73, 0x65, 0x50, 0x68, 0x72, 0x61,
-	0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2a, 0x2e, 0x63, 0x68, 0x61, 0x74,
-	0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x68, 0x65,
-	0x63, 0x6b, 0x50, 0x61, 0x72, 0x73, 0x65, 0x50, 0x68, 0x72, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x5c, 0x0a, 0x0b, 0x53, 0x65, 0x74, 0x53, 0x65,
-	0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x12, 0x24, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f,
-	0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x53, 0x65, 0x74, 0x53, 0x65, 0x74,
-	0x74, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x25, 0x2e, 0x63,
-	0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e,
-	0x53, 0x65, 0x74, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x47, 0x0a, 0x04, 0x53, 0x74, 0x61, 0x74, 0x12, 0x1d, 0x2e,
+	0x74, 0x1a, 0x2a, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72,
+	0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x50, 0x61, 0x72, 0x73, 0x65, 0x50,
+	0x68, 0x72, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12,
+	0x59, 0x0a, 0x0a, 0x53, 0x65, 0x74, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x23, 0x2e,
 	0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
-	0x2e, 0x53, 0x74, 0x61, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1e, 0x2e, 0x63,
+	0x2e, 0x53, 0x65, 0x74, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x24, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65,
+	0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x53, 0x65, 0x74, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x59, 0x0a, 0x0a, 0x47, 0x65,
+	0x74, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x23, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f,
+	0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x56,
+	0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e,
+	0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x2e, 0x47, 0x65, 0x74, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x5f, 0x0a, 0x0c, 0x4c, 0x69, 0x73, 0x74, 0x56, 0x65, 0x72,
+	0x73, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x25, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74,
+	0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x56, 0x65, 0x72,
+	0x73, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x26, 0x2e, 0x63,
 	0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e,
-	0x53, 0x74, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x4a,
-	0x0a, 0x05, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x12, 0x1e, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62,
-	0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x68, 0x65, 0x63, 0x6b,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62,
-	0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x68, 0x65, 0x63, 0x6b,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x2f,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x4c, 0x69, 0x73, 0x74, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x5c, 0x0a, 0x0b, 0x54, 0x65, 0x73, 0x74, 0x56, 0x65,
+	0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x24, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74,
+	0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x54, 0x65, 0x73, 0x74, 0x56, 0x65, 0x72,
+	0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x25, 0x2e, 0x63, 0x68,
+	0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x54,
+	0x65, 0x73, 0x74, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x22, 0x00, 0x12, 0x50, 0x0a, 0x07, 0x47, 0x65, 0x74, 0x57, 0x6f, 0x72, 0x64, 0x12,
+	0x20, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69,
+	0x63, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x57, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x21, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72,
+	0x76, 0x69, 0x63, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x57, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x47, 0x0a, 0x04, 0x53, 0x74, 0x61, 0x74, 0x12, 0x1d,
+	0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1e, 0x2e,
+	0x63, 0x68, 0x61, 0x74, 0x5f, 0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x2e, 0x53, 0x74, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12,
+	0x4a, 0x0a, 0x05, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x12, 0x1e, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f,
+	0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x68, 0x65, 0x63,
+	0x6b, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x5f,
+	0x62, 0x6f, 0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x68, 0x65, 0x63,
+	0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x09, 0x5a, 0x07, 0x2e,
+	0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -759,37 +1430,61 @@ func file_chat_bot_proto_rawDescGZIP() []byte {
 	return file_chat_bot_proto_rawDescData
 }
 
-var file_chat_bot_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_chat_bot_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_chat_bot_proto_goTypes = []interface{}{
 	(*ParsePhraseRequest)(nil),       // 0: chat_bot_service.ParsePhraseRequest
 	(*ParsePhraseResponse)(nil),      // 1: chat_bot_service.ParsePhraseResponse
 	(*CheckParsePhraseRequest)(nil),  // 2: chat_bot_service.CheckParsePhraseRequest
 	(*CheckParsePhraseResponse)(nil), // 3: chat_bot_service.CheckParsePhraseResponse
-	(*Settings)(nil),                 // 4: chat_bot_service.Settings
-	(*SetSettingsRequest)(nil),       // 5: chat_bot_service.SetSettingsRequest
-	(*SetSettingsResponse)(nil),      // 6: chat_bot_service.SetSettingsResponse
-	(*StatRequest)(nil),              // 7: chat_bot_service.StatRequest
-	(*StatResponse)(nil),             // 8: chat_bot_service.StatResponse
-	(*CheckRequest)(nil),             // 9: chat_bot_service.CheckRequest
-	(*CheckResponse)(nil),            // 10: chat_bot_service.CheckResponse
+	(*VersionId)(nil),                // 4: chat_bot_service.VersionId
+	(*Version)(nil),                  // 5: chat_bot_service.Version
+	(*SetVersionRequest)(nil),        // 6: chat_bot_service.SetVersionRequest
+	(*SetVersionResponse)(nil),       // 7: chat_bot_service.SetVersionResponse
+	(*GetVersionRequest)(nil),        // 8: chat_bot_service.GetVersionRequest
+	(*GetVersionResponse)(nil),       // 9: chat_bot_service.GetVersionResponse
+	(*ListVersions)(nil),             // 10: chat_bot_service.ListVersions
+	(*ListVersionsRequest)(nil),      // 11: chat_bot_service.ListVersionsRequest
+	(*ListVersionsResponse)(nil),     // 12: chat_bot_service.ListVersionsResponse
+	(*TestVersionRequest)(nil),       // 13: chat_bot_service.TestVersionRequest
+	(*TestVersionResponse)(nil),      // 14: chat_bot_service.TestVersionResponse
+	(*GetWordRequest)(nil),           // 15: chat_bot_service.GetWordRequest
+	(*GetWordResponse)(nil),          // 16: chat_bot_service.GetWordResponse
+	(*StatRequest)(nil),              // 17: chat_bot_service.StatRequest
+	(*StatResponse)(nil),             // 18: chat_bot_service.StatResponse
+	(*CheckRequest)(nil),             // 19: chat_bot_service.CheckRequest
+	(*CheckResponse)(nil),            // 20: chat_bot_service.CheckResponse
 }
 var file_chat_bot_proto_depIdxs = []int32{
-	4,  // 0: chat_bot_service.SetSettingsRequest.settings:type_name -> chat_bot_service.Settings
-	0,  // 1: chat_bot_service.ChatBot.ParsePhrase:input_type -> chat_bot_service.ParsePhraseRequest
-	2,  // 2: chat_bot_service.ChatBot.CheckParsePhrase:input_type -> chat_bot_service.CheckParsePhraseRequest
-	5,  // 3: chat_bot_service.ChatBot.SetSettings:input_type -> chat_bot_service.SetSettingsRequest
-	7,  // 4: chat_bot_service.ChatBot.Stat:input_type -> chat_bot_service.StatRequest
-	9,  // 5: chat_bot_service.ChatBot.Check:input_type -> chat_bot_service.CheckRequest
-	1,  // 6: chat_bot_service.ChatBot.ParsePhrase:output_type -> chat_bot_service.ParsePhraseResponse
-	3,  // 7: chat_bot_service.ChatBot.CheckParsePhrase:output_type -> chat_bot_service.CheckParsePhraseResponse
-	6,  // 8: chat_bot_service.ChatBot.SetSettings:output_type -> chat_bot_service.SetSettingsResponse
-	8,  // 9: chat_bot_service.ChatBot.Stat:output_type -> chat_bot_service.StatResponse
-	10, // 10: chat_bot_service.ChatBot.Check:output_type -> chat_bot_service.CheckResponse
-	6,  // [6:11] is the sub-list for method output_type
-	1,  // [1:6] is the sub-list for method input_type
-	1,  // [1:1] is the sub-list for extension type_name
-	1,  // [1:1] is the sub-list for extension extendee
-	0,  // [0:1] is the sub-list for field type_name
+	4,  // 0: chat_bot_service.Version.version_id:type_name -> chat_bot_service.VersionId
+	5,  // 1: chat_bot_service.SetVersionRequest.version:type_name -> chat_bot_service.Version
+	4,  // 2: chat_bot_service.GetVersionRequest.version_id:type_name -> chat_bot_service.VersionId
+	5,  // 3: chat_bot_service.GetVersionResponse.version:type_name -> chat_bot_service.Version
+	4,  // 4: chat_bot_service.ListVersions.version_id:type_name -> chat_bot_service.VersionId
+	10, // 5: chat_bot_service.ListVersionsResponse.list_versions:type_name -> chat_bot_service.ListVersions
+	5,  // 6: chat_bot_service.TestVersionRequest.version:type_name -> chat_bot_service.Version
+	0,  // 7: chat_bot_service.ChatBot.ParsePhrase:input_type -> chat_bot_service.ParsePhraseRequest
+	2,  // 8: chat_bot_service.ChatBot.CheckParsePhrase:input_type -> chat_bot_service.CheckParsePhraseRequest
+	6,  // 9: chat_bot_service.ChatBot.SetVersion:input_type -> chat_bot_service.SetVersionRequest
+	8,  // 10: chat_bot_service.ChatBot.GetVersion:input_type -> chat_bot_service.GetVersionRequest
+	11, // 11: chat_bot_service.ChatBot.ListVersions:input_type -> chat_bot_service.ListVersionsRequest
+	13, // 12: chat_bot_service.ChatBot.TestVersion:input_type -> chat_bot_service.TestVersionRequest
+	15, // 13: chat_bot_service.ChatBot.GetWord:input_type -> chat_bot_service.GetWordRequest
+	17, // 14: chat_bot_service.ChatBot.Stat:input_type -> chat_bot_service.StatRequest
+	19, // 15: chat_bot_service.ChatBot.Check:input_type -> chat_bot_service.CheckRequest
+	1,  // 16: chat_bot_service.ChatBot.ParsePhrase:output_type -> chat_bot_service.ParsePhraseResponse
+	3,  // 17: chat_bot_service.ChatBot.CheckParsePhrase:output_type -> chat_bot_service.CheckParsePhraseResponse
+	7,  // 18: chat_bot_service.ChatBot.SetVersion:output_type -> chat_bot_service.SetVersionResponse
+	9,  // 19: chat_bot_service.ChatBot.GetVersion:output_type -> chat_bot_service.GetVersionResponse
+	12, // 20: chat_bot_service.ChatBot.ListVersions:output_type -> chat_bot_service.ListVersionsResponse
+	14, // 21: chat_bot_service.ChatBot.TestVersion:output_type -> chat_bot_service.TestVersionResponse
+	16, // 22: chat_bot_service.ChatBot.GetWord:output_type -> chat_bot_service.GetWordResponse
+	18, // 23: chat_bot_service.ChatBot.Stat:output_type -> chat_bot_service.StatResponse
+	20, // 24: chat_bot_service.ChatBot.Check:output_type -> chat_bot_service.CheckResponse
+	16, // [16:25] is the sub-list for method output_type
+	7,  // [7:16] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_chat_bot_proto_init() }
@@ -847,7 +1542,7 @@ func file_chat_bot_proto_init() {
 			}
 		}
 		file_chat_bot_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Settings); i {
+			switch v := v.(*VersionId); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -859,7 +1554,7 @@ func file_chat_bot_proto_init() {
 			}
 		}
 		file_chat_bot_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SetSettingsRequest); i {
+			switch v := v.(*Version); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -871,7 +1566,7 @@ func file_chat_bot_proto_init() {
 			}
 		}
 		file_chat_bot_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SetSettingsResponse); i {
+			switch v := v.(*SetVersionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -883,7 +1578,7 @@ func file_chat_bot_proto_init() {
 			}
 		}
 		file_chat_bot_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StatRequest); i {
+			switch v := v.(*SetVersionResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -895,7 +1590,7 @@ func file_chat_bot_proto_init() {
 			}
 		}
 		file_chat_bot_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StatResponse); i {
+			switch v := v.(*GetVersionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -907,7 +1602,7 @@ func file_chat_bot_proto_init() {
 			}
 		}
 		file_chat_bot_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CheckRequest); i {
+			switch v := v.(*GetVersionResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -919,6 +1614,126 @@ func file_chat_bot_proto_init() {
 			}
 		}
 		file_chat_bot_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListVersions); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_chat_bot_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListVersionsRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_chat_bot_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListVersionsResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_chat_bot_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*TestVersionRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_chat_bot_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*TestVersionResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_chat_bot_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetWordRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_chat_bot_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetWordResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_chat_bot_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*StatRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_chat_bot_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*StatResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_chat_bot_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CheckRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_chat_bot_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CheckResponse); i {
 			case 0:
 				return &v.state
@@ -933,15 +1748,19 @@ func file_chat_bot_proto_init() {
 	}
 	file_chat_bot_proto_msgTypes[1].OneofWrappers = []interface{}{}
 	file_chat_bot_proto_msgTypes[3].OneofWrappers = []interface{}{}
-	file_chat_bot_proto_msgTypes[6].OneofWrappers = []interface{}{}
-	file_chat_bot_proto_msgTypes[8].OneofWrappers = []interface{}{}
+	file_chat_bot_proto_msgTypes[7].OneofWrappers = []interface{}{}
+	file_chat_bot_proto_msgTypes[9].OneofWrappers = []interface{}{}
+	file_chat_bot_proto_msgTypes[12].OneofWrappers = []interface{}{}
+	file_chat_bot_proto_msgTypes[14].OneofWrappers = []interface{}{}
+	file_chat_bot_proto_msgTypes[16].OneofWrappers = []interface{}{}
+	file_chat_bot_proto_msgTypes[18].OneofWrappers = []interface{}{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_chat_bot_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -969,7 +1788,12 @@ const _ = grpc.SupportPackageIsVersion6
 type ChatBotClient interface {
 	ParsePhrase(ctx context.Context, in *ParsePhraseRequest, opts ...grpc.CallOption) (*ParsePhraseResponse, error)
 	CheckParsePhrase(ctx context.Context, in *CheckParsePhraseRequest, opts ...grpc.CallOption) (*CheckParsePhraseResponse, error)
-	SetSettings(ctx context.Context, in *SetSettingsRequest, opts ...grpc.CallOption) (*SetSettingsResponse, error)
+	SetVersion(ctx context.Context, in *SetVersionRequest, opts ...grpc.CallOption) (*SetVersionResponse, error)
+	GetVersion(ctx context.Context, in *GetVersionRequest, opts ...grpc.CallOption) (*GetVersionResponse, error)
+	ListVersions(ctx context.Context, in *ListVersionsRequest, opts ...grpc.CallOption) (*ListVersionsResponse, error)
+	TestVersion(ctx context.Context, in *TestVersionRequest, opts ...grpc.CallOption) (*TestVersionResponse, error)
+	//    rpc CheckTestVersion(CheckTestVersionRequest) returns (CheckTestVersionResponse) {}
+	GetWord(ctx context.Context, in *GetWordRequest, opts ...grpc.CallOption) (*GetWordResponse, error)
 	Stat(ctx context.Context, in *StatRequest, opts ...grpc.CallOption) (*StatResponse, error)
 	Check(ctx context.Context, in *CheckRequest, opts ...grpc.CallOption) (*CheckResponse, error)
 }
@@ -1000,9 +1824,45 @@ func (c *chatBotClient) CheckParsePhrase(ctx context.Context, in *CheckParsePhra
 	return out, nil
 }
 
-func (c *chatBotClient) SetSettings(ctx context.Context, in *SetSettingsRequest, opts ...grpc.CallOption) (*SetSettingsResponse, error) {
-	out := new(SetSettingsResponse)
-	err := c.cc.Invoke(ctx, "/chat_bot_service.ChatBot/SetSettings", in, out, opts...)
+func (c *chatBotClient) SetVersion(ctx context.Context, in *SetVersionRequest, opts ...grpc.CallOption) (*SetVersionResponse, error) {
+	out := new(SetVersionResponse)
+	err := c.cc.Invoke(ctx, "/chat_bot_service.ChatBot/SetVersion", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatBotClient) GetVersion(ctx context.Context, in *GetVersionRequest, opts ...grpc.CallOption) (*GetVersionResponse, error) {
+	out := new(GetVersionResponse)
+	err := c.cc.Invoke(ctx, "/chat_bot_service.ChatBot/GetVersion", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatBotClient) ListVersions(ctx context.Context, in *ListVersionsRequest, opts ...grpc.CallOption) (*ListVersionsResponse, error) {
+	out := new(ListVersionsResponse)
+	err := c.cc.Invoke(ctx, "/chat_bot_service.ChatBot/ListVersions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatBotClient) TestVersion(ctx context.Context, in *TestVersionRequest, opts ...grpc.CallOption) (*TestVersionResponse, error) {
+	out := new(TestVersionResponse)
+	err := c.cc.Invoke(ctx, "/chat_bot_service.ChatBot/TestVersion", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatBotClient) GetWord(ctx context.Context, in *GetWordRequest, opts ...grpc.CallOption) (*GetWordResponse, error) {
+	out := new(GetWordResponse)
+	err := c.cc.Invoke(ctx, "/chat_bot_service.ChatBot/GetWord", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1031,7 +1891,12 @@ func (c *chatBotClient) Check(ctx context.Context, in *CheckRequest, opts ...grp
 type ChatBotServer interface {
 	ParsePhrase(context.Context, *ParsePhraseRequest) (*ParsePhraseResponse, error)
 	CheckParsePhrase(context.Context, *CheckParsePhraseRequest) (*CheckParsePhraseResponse, error)
-	SetSettings(context.Context, *SetSettingsRequest) (*SetSettingsResponse, error)
+	SetVersion(context.Context, *SetVersionRequest) (*SetVersionResponse, error)
+	GetVersion(context.Context, *GetVersionRequest) (*GetVersionResponse, error)
+	ListVersions(context.Context, *ListVersionsRequest) (*ListVersionsResponse, error)
+	TestVersion(context.Context, *TestVersionRequest) (*TestVersionResponse, error)
+	//    rpc CheckTestVersion(CheckTestVersionRequest) returns (CheckTestVersionResponse) {}
+	GetWord(context.Context, *GetWordRequest) (*GetWordResponse, error)
 	Stat(context.Context, *StatRequest) (*StatResponse, error)
 	Check(context.Context, *CheckRequest) (*CheckResponse, error)
 }
@@ -1046,8 +1911,20 @@ func (*UnimplementedChatBotServer) ParsePhrase(context.Context, *ParsePhraseRequ
 func (*UnimplementedChatBotServer) CheckParsePhrase(context.Context, *CheckParsePhraseRequest) (*CheckParsePhraseResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckParsePhrase not implemented")
 }
-func (*UnimplementedChatBotServer) SetSettings(context.Context, *SetSettingsRequest) (*SetSettingsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetSettings not implemented")
+func (*UnimplementedChatBotServer) SetVersion(context.Context, *SetVersionRequest) (*SetVersionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetVersion not implemented")
+}
+func (*UnimplementedChatBotServer) GetVersion(context.Context, *GetVersionRequest) (*GetVersionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetVersion not implemented")
+}
+func (*UnimplementedChatBotServer) ListVersions(context.Context, *ListVersionsRequest) (*ListVersionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListVersions not implemented")
+}
+func (*UnimplementedChatBotServer) TestVersion(context.Context, *TestVersionRequest) (*TestVersionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TestVersion not implemented")
+}
+func (*UnimplementedChatBotServer) GetWord(context.Context, *GetWordRequest) (*GetWordResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetWord not implemented")
 }
 func (*UnimplementedChatBotServer) Stat(context.Context, *StatRequest) (*StatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Stat not implemented")
@@ -1096,20 +1973,92 @@ func _ChatBot_CheckParsePhrase_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ChatBot_SetSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetSettingsRequest)
+func _ChatBot_SetVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetVersionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ChatBotServer).SetSettings(ctx, in)
+		return srv.(ChatBotServer).SetVersion(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/chat_bot_service.ChatBot/SetSettings",
+		FullMethod: "/chat_bot_service.ChatBot/SetVersion",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ChatBotServer).SetSettings(ctx, req.(*SetSettingsRequest))
+		return srv.(ChatBotServer).SetVersion(ctx, req.(*SetVersionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatBot_GetVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetVersionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatBotServer).GetVersion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chat_bot_service.ChatBot/GetVersion",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatBotServer).GetVersion(ctx, req.(*GetVersionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatBot_ListVersions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListVersionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatBotServer).ListVersions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chat_bot_service.ChatBot/ListVersions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatBotServer).ListVersions(ctx, req.(*ListVersionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatBot_TestVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TestVersionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatBotServer).TestVersion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chat_bot_service.ChatBot/TestVersion",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatBotServer).TestVersion(ctx, req.(*TestVersionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatBot_GetWord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatBotServer).GetWord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chat_bot_service.ChatBot/GetWord",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatBotServer).GetWord(ctx, req.(*GetWordRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1163,8 +2112,24 @@ var _ChatBot_serviceDesc = grpc.ServiceDesc{
 			Handler:    _ChatBot_CheckParsePhrase_Handler,
 		},
 		{
-			MethodName: "SetSettings",
-			Handler:    _ChatBot_SetSettings_Handler,
+			MethodName: "SetVersion",
+			Handler:    _ChatBot_SetVersion_Handler,
+		},
+		{
+			MethodName: "GetVersion",
+			Handler:    _ChatBot_GetVersion_Handler,
+		},
+		{
+			MethodName: "ListVersions",
+			Handler:    _ChatBot_ListVersions_Handler,
+		},
+		{
+			MethodName: "TestVersion",
+			Handler:    _ChatBot_TestVersion_Handler,
+		},
+		{
+			MethodName: "GetWord",
+			Handler:    _ChatBot_GetWord_Handler,
 		},
 		{
 			MethodName: "Stat",
