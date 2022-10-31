@@ -136,13 +136,96 @@ func GrpcGetVersion(conn *grpc.ClientConn, state string, id string, date string)
 	return response.Result, e, rl, gl, nil
 }
 
+type FilterField struct {
+	Id string
+	Values []string
+	Strict bool
+}
+
+type SortField struct {
+	Id string
+	Type string
+}
+
+type Pagination struct {
+	Limit int32
+	Offset int32
+}
+
+type GetLogsIn struct {
+        FilterFields []FilterField
+        SortFields SortField
+        TableFields []string
+        Pagination Pagination
+}
+
+type LogRow struct {
+    Id string
+    Data string
+    UserRequest string
+    BotResponse string
+    Version string
+    UserId string
+}
+
+type GetLogsOut struct {
+    Count int32
+    Rows []LogRow 
+}
+
+// GetLogs(context.Context, *GetLogsRequest) (*GetLogsResponse, error)
+func GrpcGetLogs(conn *grpc.ClientConn, gl GetLogsIn) (string, string, GetLogsOut, error) {
+	client := proto.NewChatBotClient(conn)
+	ffa :=  []*proto.FilterField{}
+	for i, _ := range gl.FilterFields {
+		ff :=  proto.FilterField{
+			Id: gl.FilterFields[i].Id,
+                        Values: gl.FilterFields[i].Values,
+                        Strict: gl.FilterFields[i].Strict,
+		}
+		ffa = append(ffa, &ff)
+	}
+	request := &proto.GetLogsRequest{
+		FilterFields: ffa,
+		SortFields: &proto.SortField{Id: gl.SortFields.Id, Type: gl.SortFields.Type},
+		TableFields: gl.TableFields,
+		Pagination: &proto.Pagination{Limit: gl.Pagination.Limit, Offset: gl.Pagination.Offset},
+	}
+	response, err := client.GetLogs(context.Background(), request)
+	if err != nil {
+		grpclog.Fatalf("fail to dial: %v", err)
+		return "", "", GetLogsOut{}, err
+	}
+	e := ""
+	if response.Error != nil {
+		e = *response.Error
+	}
+	glo := GetLogsOut{}
+	if response.LogResult != nil {
+	        glo.Count = response.LogResult.Count
+	        for i, _ := range response.LogResult.Rows {
+	        	r := LogRow{
+	        		response.LogResult.Rows[i].Id,
+	        		response.LogResult.Rows[i].Data,
+	        		response.LogResult.Rows[i].UserRequest,
+	        		response.LogResult.Rows[i].BotResponse,
+	        		response.LogResult.Rows[i].Version,
+	        		response.LogResult.Rows[i].UserId,
+			}
+			glo.Rows = append(glo.Rows, r)
+	        }
+	}
+
+	return response.Result, e, glo, nil
+}
+
 type ListVersionsItem struct {
 	Id string
 	Date string
 }
 
 // ListVersions(context.Context, *ListVersionsRequest) (*ListVersionsResponse, error)
-func GrpcListVersions(conn *grpc.ClientConn, state string) (string, string, []ListVersionsItem, error) {
+func GrpcListVersions(conn *grpc.ClientConn, state string) (string, []ListVersionsItem, string, error) {
 	client := proto.NewChatBotClient(conn)
 	request := &proto.ListVersionsRequest{
 		State: state,
@@ -150,7 +233,7 @@ func GrpcListVersions(conn *grpc.ClientConn, state string) (string, string, []Li
 	response, err := client.ListVersions(context.Background(), request)
 	if err != nil {
 		grpclog.Fatalf("fail to dial: %v", err)
-		return "", "", nil, err
+		return "", nil, "", err
 	}
 	e := ""
 	if response.Error != nil {
@@ -164,7 +247,7 @@ func GrpcListVersions(conn *grpc.ClientConn, state string) (string, string, []Li
 	     }
 	}
 
-	return response.Result, e, lvia, nil
+	return response.Result, lvia, e, nil
 }
 
 // TestVersion(context.Context, *TestVersionRequest) (*TestVersionResponse, error)
@@ -231,8 +314,12 @@ func GrpcGetWord(conn *grpc.ClientConn, word string) (string, string, string, er
 	if response.Error != nil {
 		e = *response.Error
 	}
+	part_of_speach := ""
+	if response.PartOfSpeach != nil {
+		part_of_speach = *response.PartOfSpeach
+	}
 
-	return response.Result, e, response.PartOfSpeach, nil
+	return response.Result, part_of_speach, e, nil
 }
 
 // Stat(context.Context, *StatRequest) (*StatResponse, error)
