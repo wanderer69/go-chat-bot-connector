@@ -48,6 +48,7 @@ message SetVersionRequest {
 message SetVersionResponse {
     string result = 1;
     optional string error =2;
+    optional VersionId version_id = 3;
 }
 
 message GetVersionRequest {
