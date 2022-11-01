@@ -81,7 +81,7 @@ func GrpcCheckParsePhrase(conn *grpc.ClientConn, id string) (string, string, str
 }
 
 // SetVersion(context.Context, *SetVersionRequest) (*SetVersionResponse, error)
-func GrpcSetVersion(conn *grpc.ClientConn, state string, id string, date string, rl string, gl string) (string, string, error) {
+func GrpcSetVersion(conn *grpc.ClientConn, state string, id string, date string, rl string, gl string) (string, string, string, error) {
 	client := proto.NewChatBotClient(conn)
 	request := &proto.SetVersionRequest{
 		State: state,
@@ -97,14 +97,18 @@ func GrpcSetVersion(conn *grpc.ClientConn, state string, id string, date string,
 	response, err := client.SetVersion(context.Background(), request)
 	if err != nil {
 		grpclog.Fatalf("fail to dial: %v", err)
-		return "", "", err
+		return "", "", "", err
 	}
 	e := ""
+	idn := ""
 	if response.Error != nil {
 		e = *response.Error
+	} else {
+		if response.VersionId != nil {
+			idn = response.VersionId.Id
+		}
 	}
-
-	return response.Result, e, nil
+	return response.Result, idn, e, nil
 }
 
 // GetVersion(context.Context, *GetVersionRequest) (*GetVersionResponse, error)
@@ -300,7 +304,7 @@ func GrpcCheckTestVersion(conn *grpc.ClientConn, id string) (string, string, str
 }
 */
 // GetWord(context.Context, *GetWordRequest) (*GetWordResponse, error)
-func GrpcGetWord(conn *grpc.ClientConn, word string) (string, string, string, error) {
+func GrpcGetWord(conn *grpc.ClientConn, word string) (string, [][]string, string, error) {
 	client := proto.NewChatBotClient(conn)
 	request := &proto.GetWordRequest{
 		Word: word,
@@ -308,18 +312,21 @@ func GrpcGetWord(conn *grpc.ClientConn, word string) (string, string, string, er
 	response, err := client.GetWord(context.Background(), request)
 	if err != nil {
 		grpclog.Fatalf("fail to dial: %v", err)
-		return "", "", "", err
+		return "", nil, "", err
 	}
 	e := ""
 	if response.Error != nil {
 		e = *response.Error
 	}
-	part_of_speach := ""
-	if response.PartOfSpeach != nil {
-		part_of_speach = *response.PartOfSpeach
+	wpl := [][]string{}
+	if response.WordProps != nil {
+                for i, _ := range response.WordProps.WordProps {
+                       wp := []string{response.WordProps.WordProps[i].BaseWord, response.WordProps.WordProps[i].PartOfSpeach}
+                       wpl = append(wpl, wp)
+                }
 	}
 
-	return response.Result, part_of_speach, e, nil
+	return response.Result, wpl, e, nil
 }
 
 // Stat(context.Context, *StatRequest) (*StatResponse, error)

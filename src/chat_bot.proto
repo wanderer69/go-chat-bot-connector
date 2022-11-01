@@ -138,10 +138,19 @@ message GetWordRequest {
     string word = 1;
 }
 
+message WordProp {
+    string base_word = 1;
+    string part_of_speach = 2;
+}
+
+message WordProps {
+    repeated WordProp word_props = 1;
+}
+
 message GetWordResponse {
     string result = 1;
     optional string error = 2;
-    optional string part_of_speach = 3;
+    optional WordProps word_props = 3;
 }
 
 /* Statistic info
