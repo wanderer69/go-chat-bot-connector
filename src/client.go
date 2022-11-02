@@ -137,7 +137,7 @@ func GrpcGetVersion(conn *grpc.ClientConn, state string, id string, date string)
 		gl = response.Version.GrammaticsList
 	}
 
-	return response.Result, e, rl, gl, nil
+	return response.Result, rl, gl, e, nil
 }
 
 type FilterField struct {
@@ -178,7 +178,7 @@ type GetLogsOut struct {
 }
 
 // GetLogs(context.Context, *GetLogsRequest) (*GetLogsResponse, error)
-func GrpcGetLogs(conn *grpc.ClientConn, gl GetLogsIn) (string, string, GetLogsOut, error) {
+func GrpcGetLogs(conn *grpc.ClientConn, gl GetLogsIn) (string, GetLogsOut, string, error) {
 	client := proto.NewChatBotClient(conn)
 	ffa :=  []*proto.FilterField{}
 	for i, _ := range gl.FilterFields {
@@ -198,7 +198,7 @@ func GrpcGetLogs(conn *grpc.ClientConn, gl GetLogsIn) (string, string, GetLogsOu
 	response, err := client.GetLogs(context.Background(), request)
 	if err != nil {
 		grpclog.Fatalf("fail to dial: %v", err)
-		return "", "", GetLogsOut{}, err
+		return "", GetLogsOut{}, "", err
 	}
 	e := ""
 	if response.Error != nil {
@@ -220,7 +220,7 @@ func GrpcGetLogs(conn *grpc.ClientConn, gl GetLogsIn) (string, string, GetLogsOu
 	        }
 	}
 
-	return response.Result, e, glo, nil
+	return response.Result, glo, e, nil
 }
 
 type ListVersionsItem struct {
