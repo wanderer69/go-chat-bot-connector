@@ -40,6 +40,11 @@ message Version {
     string grammatics_list = 3;
 }
 
+message CheckResult {
+    string result = 1;
+    string description = 2;
+}
+
 message SetVersionRequest {
     string state = 1;
     Version version = 2;
@@ -49,6 +54,7 @@ message SetVersionResponse {
     string result = 1;
     optional string error =2;
     optional VersionId version_id = 3;
+    optional CheckResult check_result = 4;
 }
 
 message GetVersionRequest {
@@ -173,16 +179,26 @@ message CheckResponse {
     string result = 1;
 }
 
+message ModeRequest {
+    string query = 1;
+}
+
+message ModeResponse {
+    string result = 1;
+}
+
 /* сервис ChatBot с методами 
 ParseSentense, 
-CheckParseSentense, 
+CheckParseSentense,
+GetLogs, 
 SetVersion, 
 GetVersion, 
 ListVersions,
 TestVersion,
 GetWord,
 Stat, 
-Check
+Check,
+Mode
 */
 
 service ChatBot {
@@ -197,4 +213,5 @@ service ChatBot {
     rpc GetWord(GetWordRequest) returns (GetWordResponse) {}
     rpc Stat(StatRequest) returns (StatResponse) {}
     rpc Check(CheckRequest) returns (CheckResponse) {}
+    rpc Mode(ModeRequest) returns (ModeResponse) {}
 }
