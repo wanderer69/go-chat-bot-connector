@@ -32,6 +32,7 @@ message CheckParsePhraseResponse {
 message VersionId {
     string id = 1;
     string date = 2;
+    string name = 3;
 }
 
 message Version {
@@ -52,7 +53,7 @@ message SetVersionRequest {
 
 message SetVersionResponse {
     string result = 1;
-    optional string error =2;
+    optional string error = 2;
     optional VersionId version_id = 3;
     optional CheckResult check_result = 4;
 }
@@ -93,7 +94,7 @@ message GetLogsRequest {
 
 message LogRow {
     string id = 1;
-    string data = 2;
+    string date = 2;
     string user_request = 3;
     string bot_response = 4;
     string version = 5;
@@ -112,8 +113,15 @@ message GetLogsResponse {
     optional LogResult log_result = 3;
 }
 
+message VersionItem {
+    string id = 1;
+    string date = 2;
+    string name = 3;
+    bool is_default = 4;
+}
+
 message ListVersions {
-    repeated VersionId version_id = 1;
+    repeated VersionItem version_id = 1;
 }
 
 message ListVersionsRequest {

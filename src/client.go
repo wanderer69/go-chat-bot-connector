@@ -81,7 +81,7 @@ func GrpcCheckParsePhrase(conn *grpc.ClientConn, id string) (string, string, str
 }
 
 // SetVersion(context.Context, *SetVersionRequest) (*SetVersionResponse, error)
-func GrpcSetVersion(conn *grpc.ClientConn, state string, id string, date string, rl string, gl string) (string, string, string, error) {
+func GrpcSetVersion(conn *grpc.ClientConn, state string, id string, date string, name string, rl string, gl string) (string, string, string, error) {
 	client := proto.NewChatBotClient(conn)
 	request := &proto.SetVersionRequest{
 		State: state,
@@ -89,6 +89,7 @@ func GrpcSetVersion(conn *grpc.ClientConn, state string, id string, date string,
 			VersionId: &proto.VersionId{
 				Id:    id,
 				Date:  date,
+				Name:  name,
 			},
 			RelationList:    rl,
 			GrammaticsList:  gl,
@@ -210,7 +211,7 @@ func GrpcGetLogs(conn *grpc.ClientConn, gl GetLogsIn) (string, GetLogsOut, strin
 	        for i, _ := range response.LogResult.Rows {
 	        	r := LogRow{
 	        		response.LogResult.Rows[i].Id,
-	        		response.LogResult.Rows[i].Data,
+	        		response.LogResult.Rows[i].Date,
 	        		response.LogResult.Rows[i].UserRequest,
 	        		response.LogResult.Rows[i].BotResponse,
 	        		response.LogResult.Rows[i].Version,
@@ -226,6 +227,8 @@ func GrpcGetLogs(conn *grpc.ClientConn, gl GetLogsIn) (string, GetLogsOut, strin
 type ListVersionsItem struct {
 	Id string
 	Date string
+	Name string
+	IsDefault bool
 }
 
 // ListVersions(context.Context, *ListVersionsRequest) (*ListVersionsResponse, error)
@@ -246,7 +249,12 @@ func GrpcListVersions(conn *grpc.ClientConn, state string) (string, []ListVersio
         lvia := []ListVersionsItem{}
 	if response.ListVersions != nil {
 	     for i, _ := range response.ListVersions.VersionId {
-	     	lvi := ListVersionsItem{response.ListVersions.VersionId[i].Id, response.ListVersions.VersionId[i].Date}
+	     	lvi := ListVersionsItem{
+			response.ListVersions.VersionId[i].Id, 
+			response.ListVersions.VersionId[i].Date,
+			response.ListVersions.VersionId[i].Name,
+			response.ListVersions.VersionId[i].IsDefault,	
+		}
 	     	lvia = append(lvia, lvi)
 	     }
 	}
