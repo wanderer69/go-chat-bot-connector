@@ -39,6 +39,20 @@ func GrpcCheck(conn *grpc.ClientConn, query string) (string, error) {
 	return response.Result, nil
 }
 
+// Mode(context.Context, *ModeRequest) (*ModeResponse, error)
+func GrpcMode(conn *grpc.ClientConn, query string) (string, error) {
+	client := proto.NewChatBotClient(conn)
+	request := &proto.ModeRequest{
+		Query: query,
+	}
+	response, err := client.Mode(context.Background(), request)
+	if err != nil {
+		grpclog.Fatalf("fail to dial: %v", err)
+		return "error", err
+	}
+	return response.Result, nil
+}
+
 // ParsePhrase(context.Context, *ParsePhraseRequest) (*ParsePhraseResponse, error)
 func GrpcParsePhrase(conn *grpc.ClientConn, userID string, sessionID string, sentence string, sequenseNum int) (string, string, string, error) {
 	client := proto.NewChatBotClient(conn)

@@ -33,6 +33,7 @@ message VersionId {
     string id = 1;
     string date = 2;
     string name = 3;
+    bool is_default = 4;
 }
 
 message Version {
