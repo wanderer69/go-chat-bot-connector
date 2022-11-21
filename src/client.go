@@ -133,7 +133,7 @@ func GrpcSetVersion(conn *grpc.ClientConn, state string, id string, date string,
 }
 
 // GetVersion(context.Context, *GetVersionRequest) (*GetVersionResponse, error)
-func GrpcGetVersion(conn *grpc.ClientConn, state string, id string, date string) (string, string, string, string, error) {
+func GrpcGetVersion(conn *grpc.ClientConn, state string, id string, date string) (string, string, string, string, string, bool, string, error) {
 	client := proto.NewChatBotClient(conn)
 	request := &proto.GetVersionRequest{
 		State: state,
@@ -145,7 +145,7 @@ func GrpcGetVersion(conn *grpc.ClientConn, state string, id string, date string)
 	response, err := client.GetVersion(context.Background(), request)
 	if err != nil {
 		grpclog.Fatalf("fail to dial: %v", err)
-		return "", "", "", "", err
+		return "", "", "", "",  "", false, "", err
 	}
 	e := ""
 	if response.Error != nil {
@@ -153,12 +153,18 @@ func GrpcGetVersion(conn *grpc.ClientConn, state string, id string, date string)
 	}
 	rl := ""
 	gl := ""
+	date = ""
+	name := ""
+	is_default := false
 	if response.Version != nil {
 		rl = response.Version.RelationList
 		gl = response.Version.GrammaticsList
+		date = response.Version.VersionId.Date
+		name = response.Version.VersionId.Name
+		is_default = response.Version.VersionId.IsDefault
 	}
 
-	return response.Result, rl, gl, e, nil
+	return response.Result, rl, gl, date, name, is_default, e, nil
 }
 
 type FilterField struct {
