@@ -28,6 +28,11 @@ option go_package = "./proto_internal";
 
 */
 
+message DesiredItem {
+    string essence = 1;
+    string property = 2;
+}
+
 message FoundItem {
     string essence = 1;
     string property = 2;
@@ -46,10 +51,8 @@ message Founds {
 
 message FindRequest {
     string query_id = 1;
-    string desired = 2;
-    string essence = 3;
-    string property = 4;
-    repeated ConditionItem conditions = 5; // список условий
+    repeated DesiredItem desired = 2;
+    repeated ConditionItem conditions = 3; // список условий
 }
 
 message FindResponse {

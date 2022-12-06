@@ -197,6 +197,7 @@ type LogRow struct {
     BotResponse string
     Version string
     UserId string
+    SessionId string
 }
 
 type GetLogsOut struct {
@@ -242,6 +243,7 @@ func GrpcGetLogs(conn *grpc.ClientConn, gl GetLogsIn) (string, GetLogsOut, strin
 	        		response.LogResult.Rows[i].BotResponse,
 	        		response.LogResult.Rows[i].Version,
 	        		response.LogResult.Rows[i].UserId,
+	        		response.LogResult.Rows[i].SessionId,
 			}
 			glo.Rows = append(glo.Rows, r)
 	        }
