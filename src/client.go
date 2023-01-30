@@ -105,8 +105,8 @@ func GrpcSetVersion(conn *grpc.ClientConn, state string, id string, date string,
 				Date:  date,
 				Name:  name,
 			},
-			RelationList:    rl,
-			GrammaticsList:  gl,
+			RelationList:    &rl,
+			GrammaticsList:  &gl,
 		},
 	}
 	response, err := client.SetVersion(context.Background(), request)
@@ -157,8 +157,8 @@ func GrpcGetVersion(conn *grpc.ClientConn, state string, id string, date string)
 	name := ""
 	is_default := false
 	if response.Version != nil {
-		rl = response.Version.RelationList
-		gl = response.Version.GrammaticsList
+		rl = *response.Version.RelationList
+		gl = *response.Version.GrammaticsList
 		date = response.Version.VersionId.Date
 		name = response.Version.VersionId.Name
 		is_default = response.Version.VersionId.IsDefault
@@ -302,8 +302,8 @@ func GrpcTestVersion(conn *grpc.ClientConn, userID string, phrase string, id str
 				Id:    id,
 				Date:  date,
 			},
-			RelationList:    rl,
-			GrammaticsList:  gl,
+			RelationList:    &rl,
+			GrammaticsList:  &gl,
 		},
 	}
 	//	fmt.Printf("request %#v\r\n", request)

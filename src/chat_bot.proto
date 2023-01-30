@@ -38,8 +38,9 @@ message VersionId {
 
 message Version {
     VersionId version_id = 1;
-    string relation_list = 2;
-    string grammatics_list = 3;
+    optional string relation_list = 2;
+    optional string grammatics_list = 3;
+    optional string source_code = 4;
 }
 
 message CheckResult {
