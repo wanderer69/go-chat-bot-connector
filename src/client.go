@@ -76,7 +76,7 @@ func GrpcParsePhrase(conn *grpc.ClientConn, userID string, sessionID string, sen
 }
 
 // CheckParsePhrase(context.Context, *CheckParsePhraseRequest) (*CheckParsePhraseResponse, error)
-func GrpcCheckParsePhrase(conn *grpc.ClientConn, id string) (string, string, string, error) {
+func GrpcCheckParsePhrase(conn *grpc.ClientConn, id string) (string, string, map[string]string, string, error) {
 	client := proto.NewChatBotClient(conn)
 	request := &proto.CheckParsePhraseRequest{
 		QueryId: id,
@@ -84,14 +84,19 @@ func GrpcCheckParsePhrase(conn *grpc.ClientConn, id string) (string, string, str
 	response, err := client.CheckParsePhrase(context.Background(), request)
 	if err != nil {
 		grpclog.Fatalf("fail to dial: %v", err)
-		return "", "", "", err
+		return "", "", nil, "", err
 	}
 	e := ""
 	if response.Error != nil {
 		e = *response.Error
 	}
+//	mss := *proto.ExtData
+	if response.ExtData != nil {
+//		mss = 
+		return response.Result, response.Phrase, response.ExtData.Value, e, nil
+        }
 
-	return response.Result, response.Phrase, e, nil
+	return response.Result, response.Phrase, nil, e, nil
 }
 
 // SetVersion(context.Context, *SetVersionRequest) (*SetVersionResponse, error)

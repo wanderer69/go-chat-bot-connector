@@ -23,10 +23,15 @@ message CheckParsePhraseRequest {
     string query_id = 1;
 }
 
+message ExtData {
+    map<string, string> value = 1;
+}
+
 message CheckParsePhraseResponse {
     string result = 1;
-    optional string error =2;
+    optional string error = 2;
     string phrase = 3;
+    optional ExtData ext_data = 4;
 }
 
 message VersionId {
